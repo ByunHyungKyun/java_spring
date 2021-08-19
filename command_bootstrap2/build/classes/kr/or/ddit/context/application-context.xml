@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans>
+	<!-- dataSource -->
+	<bean id="sqlSessionFactory" class="kr.or.ddit.mybatis.OracleMyBatisSqlSessionFactory" />
+	
+
+	<!-- Repository Layer -->
+	<bean id="menuDAO"  class="kr.or.ddit.dao.MenuDAOImpl" />
+	<bean id="memberDAO" class="kr.or.ddit.dao.MemberDAOImpl" />
+	<bean id="noticeDAO" class="kr.or.ddit.dao.NoticeDAOImpl" />
+	<bean id="prodDAO" class="kr.or.ddit.dao.ProdDAOImpl" />
+	<bean id="prodReplyDAO" class="kr.or.ddit.dao.ProdReplyDAOImpl" />
+	
+	<!-- Service layer -->
+	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="menuDAO" ref-value="menuDAO" />
+	</bean>
+	
+	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="memberDAO" ref-value="memberDAO"/>
+	</bean>
+	
+	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="noticeDAO" ref-value="noticeDAO"/>
+	</bean>	
+	
+	<bean id="prodService" class="kr.or.ddit.service.ProdServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="prodDAO" ref-value="prodDAO"/>
+	</bean>	
+
+	<bean id="prodReplyService" class="kr.or.ddit.service.ProdReplyServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="prodReplyDAO" ref-value="prodReplyDAO"/>
+	</bean>	
+	
+
+	
+</beans>

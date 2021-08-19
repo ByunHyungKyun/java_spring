@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Prod-Mapper">
+
+	<sql id="search">
+		<if test="searchType == 'n'.toString()">
+			and name like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	<sql id="search2">
+		 <if test="_parameter != null">
+         and code = #{_parameter}        
+      </if>
+	</sql>
+
+	<select id="selectSearchProdList" resultType="prod">
+		select 
+			*
+		from prod
+		where CODE is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectSearchProdListCount" resultType="int">
+		select 
+		count(*)
+		from prod
+		where CODE is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectSearchProdDetail" resultType="prod">
+		select *
+		from prod
+		where CODE is not null
+		<include refid="search2" />
+	</select>
+	
+	<select id="selectBoardSequenceNextValue" resultType="int">
+      select prod_seq.nextVal
+      from dual
+   </select>
+	
+	<update id="insertProd" parameterType="prod">
+		insert into 
+		prod(code,name,price,detail,delivery,deliveryprice,img,detailimg)
+		values(#{code},#{name},#{price},#{detail},#{delivery},#{deliveryprice},#{img},#{detailimg})
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="member">
+	
+	
+	<select id="login"  parameterClass="String" resultClass="hw.member.dto.memberVO">
+	SELECT ID	id	
+			,PASS	pass
+			,EMAIL	email	
+			,PHONE	phone
+		FROM MEM
+		WHERE ID = #id#
+	</select>
+	
+	
+	<insert id="signup" parameterClass="hw.member.dto.memberVO" >
+		INSERT INTO MEM (
+				ID
+				,PASS
+				,EMAIL
+				,PHONE
+		) VALUES (
+			  #id#
+			, #pass#
+			, #email#
+			, #phone#
+		)
+	
+	</insert>
+	
+	<select id="allListMember" resultClass="hw.member.dto.memberVO">
+		SELECT ID	id	
+			,PASS	pass
+			,EMAIL	email	
+			,PHONE	phone
+		FROM MEM
+	</select>
+	
+	
+	
+	<update id="update" parameterClass="hw.member.dto.memberVO" >
+		UPDATE MEM
+		  SET PASS= #pass#,
+		  EMAIL = #email#,
+		  PHONE = #phone#
+		  WHERE ID = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="String" >
+		DELETE FROM MEM WHERE ID = #id#
+	</delete>
+	
+	
+</sqlMap>
